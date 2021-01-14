@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class MainPage extends PageBase {
     public MainPage(WebDriver driver) {
         super(driver);
@@ -13,10 +15,13 @@ public class MainPage extends PageBase {
     WebElement slogan;
 
     @FindBy(css ="ion-buttons.select.buttons-last-slot.sc-ion-buttons-md-h.sc-ion-buttons-md-s.md.hydrated")
-    WebElement selectLan;
+    WebElement selectLang;
 
     @FindBy(id = "ion-rb-1-lbl")
-    WebElement russianLan;
+    WebElement russianLang;
+
+    @FindBy(css = "ion-item.select-interface-option")
+    List<WebElement> langList;
 
     @FindBy(tagName = "ion-card-title")
     WebElement title;
@@ -27,10 +32,9 @@ public class MainPage extends PageBase {
     }
 
     public void selectRussianLanguage() {
-        selectLan.click();
-        waitUntilElementVisible(russianLan, 30);
-        russianLan.click();
-        waitUntilElementVisible(title, 30);
+        selectLang.click();
+        waitUntilElementVisible(russianLang, 30);
+        langList.get(1).click();
     }
 
     public boolean isLanguageOnPageRussian() {

@@ -41,6 +41,14 @@ public abstract class PageBase {
     }
   }
 
+  void waitUntilElementHasClass (WebElement element, String className, int time){
+    try {
+      new WebDriverWait(driver, time).until(ExpectedConditions.attributeContains(element, "class", className));
+    } catch (Exception e){
+      e.printStackTrace();
+    }
+  }
+
     void waitUntilElementInVisible (WebElement element, int time){
     try {
       new WebDriverWait(driver, time).until(ExpectedConditions.invisibilityOf(element));

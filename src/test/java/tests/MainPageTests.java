@@ -21,8 +21,9 @@ public class MainPageTests extends TestBase {
     }
 
     @Test(priority = 1, groups = {"functional"})
-    public void changeLanguageValidationTest(){
+    public void changeLanguageValidationTest() throws InterruptedException {
         mainPage.selectRussianLanguage();
+        Thread.sleep(500);
         assert mainPage.isLanguageOnPageRussian();
 
     }
