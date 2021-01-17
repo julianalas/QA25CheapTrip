@@ -1,5 +1,6 @@
 package tests;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -7,6 +8,8 @@ import pages.MainPage;
 
 public class MainPageTests extends TestBase {
     MainPage mainPage;
+    String cityFrom = "Moscow";
+    String cityTo = "Kiev";
 
     @BeforeMethod
     public void initTest(){
@@ -27,6 +30,20 @@ public class MainPageTests extends TestBase {
         assert mainPage.isLanguageOnPageRussian();
 
     }
+
+//    @Test
+//    public void searchResultIsPresentTest() throws InterruptedException {
+//        mainPage.inputCityInFromField(cityFrom);
+//        mainPage.inputCityInToField(cityTo);
+//        mainPage.clickOnLetsGoButton();
+//
+//
+//    }
+
+
+
+
+
 
 
 }
