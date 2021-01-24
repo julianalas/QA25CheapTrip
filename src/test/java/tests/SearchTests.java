@@ -17,14 +17,27 @@ public class SearchTests extends TestBase {
         mainPage = PageFactory.initElements(driver, MainPage.class);
     }
 
-    @Test()
-    public void searchResultIsPresent() {
+    @Test(priority = 0, groups = "functional")
+    public void searchResultIsPresentTest() {
         mainPage.inputCityInFromField(cityFrom);
         mainPage.inputCityInToField(cityTo);
         mainPage.clickOnLetsGoButton();
 
         Assert.assertTrue(mainPage.searchResultIsDisplayed(),
                 "Search result for cities:" + cityFrom + ", " +cityTo + " is not displayed!");
+
+    }
+
+    @Test(priority = 0, groups = "functional")
+    public void searchResultValidationTest() {
+        mainPage.inputCityInFromField(cityFrom);
+        mainPage.inputCityInToField(cityTo);
+        mainPage.clickOnLetsGoButton();
+
+        mainPage.isTotalPriceEqualSumOfPrices();
+
+//        Assert.assertTrue(mainPage.searchResultIsDisplayed(),
+//                "Search result for cities:" + cityFrom + ", " +cityTo + " is not displayed!");
 
     }
 

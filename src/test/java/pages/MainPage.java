@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -47,6 +48,12 @@ public class MainPage extends PageBase {
     @FindBy(css = ".city")
     List<WebElement> resultsList;
 
+    @FindBy(tagName = "ion-badge")
+    WebElement totalPrice;
+
+    @FindBy(className = "mat-expansion-panel")
+    List<WebElement> tripDataList;
+
 
     public boolean isSloganContainsText(String text) {
         return slogan.getText().contains(text);
@@ -84,18 +91,39 @@ public class MainPage extends PageBase {
 
     }
 
-//    public void inputCityInFromField(String cityFrom) throws InterruptedException {
-//        inputTextToField(fromField, cityFrom);
-//        Thread.sleep(3000);
-//    }
-//
-//    public void inputCityInToField(String cityTo) throws InterruptedException {
-//        inputTextToField(toField, cityTo);
-//        Thread.sleep(3000);
-//    }
-//
-//    public void clickOnLetsGoButton() throws InterruptedException {
-//        letsGoButton.click();
-//        Thread.sleep(3000);
-//    }
+
+    public boolean isTotalPriceEqualSumOfPrices() {
+        double priceSum = 0.0;
+        double totalPrice = 0.0;
+        waitUntilAllElementsVisible(tripDataList, 30);
+        System.out.println("Size: " + tripDataList.size());
+        for (WebElement tripData: tripDataList){
+            WebElement totalPriceElement = tripData.findElement(By.tagName("ion-badge"));
+            waitUntilElementVisible(totalPriceElement, 10);
+            totalPrice = Double.parseDouble(totalPriceElement.getText().substring(1));
+            System.out.println(totalPrice);
+
+            WebElement openList = driver.findElement(By.cssSelector("[style=\"transform: rotate(0deg);\"]"));
+            waitUntilElementVisible(openList, 10);
+            openList.click();
+
+
+            List <WebElement> priceListElement = tripData.findElements(By.xpath("//span[contains(text(),'€')]"));
+            int count = priceListElement.size();
+            System.out.println("Count:" + count);
+
+            for (WebElement priseElement : priceListElement){
+                System.out.println("Price: " + priseElement.getText());
+                priceSum += Double.parseDouble(priseElement.getText().substring(1));
+            }
+            System.out.println("Price sum: " + priceSum);
+
+
+        }
+
+        return totalPrice == priceSum;
+        
+    }
+
+
 }

@@ -2,6 +2,7 @@ package tests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.MainPage;
@@ -19,7 +20,7 @@ public class MainPageTests extends TestBase {
     @Test(priority = 2, groups = {"UI"})
     public void sloganValidationTest(){
         String text = "CheapTrip. Pay less, travel more";
-        assert mainPage.isSloganContainsText(text);
+        Assert.assertTrue( mainPage.isSloganContainsText(text));
 
     }
 
@@ -27,18 +28,10 @@ public class MainPageTests extends TestBase {
     public void changeLanguageValidationTest() throws InterruptedException {
         mainPage.selectRussianLanguage();
         Thread.sleep(500);
-        assert mainPage.isLanguageOnPageRussian();
+        Assert.assertTrue(mainPage.isLanguageOnPageRussian());
 
     }
 
-//    @Test
-//    public void searchResultIsPresentTest() throws InterruptedException {
-//        mainPage.inputCityInFromField(cityFrom);
-//        mainPage.inputCityInToField(cityTo);
-//        mainPage.clickOnLetsGoButton();
-//
-//
-//    }
 
 
 
