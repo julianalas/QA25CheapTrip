@@ -28,7 +28,7 @@ public class SearchTests extends TestBase {
 
     }
 
-    @Test(priority = 0, groups = "functional")
+    @Test(enabled = false, priority = 0, groups = "functional")
     public void searchResultValidationTest() {
         mainPage.inputCityInFromField(cityFrom);
         mainPage.inputCityInToField(cityTo);

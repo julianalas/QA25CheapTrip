@@ -1,4 +1,9 @@
 <configuration>
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </root>
+
     <!-- Insert the current time formatted as "yyyyMMdd'T'HHmmss" under
        the key "bySecond" into the logger context. This value will be
        available to all subsequent configuration elements. -->
@@ -23,9 +28,6 @@
         </encoder>
     </appender>
 
-    <root level="info">
-        <appender-ref ref="STDOUT" />
-        <appender-ref ref="FILE" />
-    </root>
+
 
 </configuration>

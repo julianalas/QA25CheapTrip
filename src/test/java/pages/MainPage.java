@@ -97,24 +97,29 @@ public class MainPage extends PageBase {
         double totalPrice = 0.0;
         waitUntilAllElementsVisible(tripDataList, 30);
         System.out.println("Size: " + tripDataList.size());
+
+//        создаем список элементов
+        List<WebElement> tripDataList = driver.findElements(By.className("mat-expansion-panel"));
+//         перебираем элементы по одному
         for (WebElement tripData: tripDataList){
+//            в элементе ищем другой элемент
             WebElement totalPriceElement = tripData.findElement(By.tagName("ion-badge"));
             waitUntilElementVisible(totalPriceElement, 10);
             totalPrice = Double.parseDouble(totalPriceElement.getText().substring(1));
-            System.out.println(totalPrice);
+            System.out.println("Total price: " + totalPrice);
 
             WebElement openList = driver.findElement(By.cssSelector("[style=\"transform: rotate(0deg);\"]"));
             waitUntilElementVisible(openList, 10);
             openList.click();
 
 
-            List <WebElement> priceListElement = tripData.findElements(By.xpath("//span[contains(text(),'€')]"));
+            List <WebElement> priceListElement = tripData.findElements(By.cssSelector("span.currency"));
             int count = priceListElement.size();
             System.out.println("Count:" + count);
 
             for (WebElement priseElement : priceListElement){
-                System.out.println("Price: " + priseElement.getText());
-                priceSum += Double.parseDouble(priseElement.getText().substring(1));
+                System.out.println("Price: " + priseElement.getAttribute("text"));
+//                priceSum += Double.parseDouble(priseElement.getText().substring(1));
             }
             System.out.println("Price sum: " + priceSum);
 

@@ -7,7 +7,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.Screenshot;
 
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public abstract class PageBase {
@@ -118,6 +124,14 @@ public abstract class PageBase {
       return false;
     }
     return true;
+  }
+  public void getScreenshot() throws IOException {
+    Screenshot screenshot = new AShot().takeScreenshot(driver);
+    String fileName = "./screenshots/MainPage "  + LocalDateTime.now() + ".png";
+
+    File outputfile = new File(fileName);
+    ImageIO.write(screenshot.getImage(), "png", outputfile);
+
   }
 
 }
